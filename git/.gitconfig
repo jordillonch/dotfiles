@@ -1,0 +1,32 @@
+[user]
+	name = Jordi Llonch
+    email = llonch.jordi@gmail.com
+
+[core]
+	excludesfile = ~/.dotfiles/git/.gitignore_global
+    editor = vim
+	autocrlf = input
+
+[push]
+	default = simple
+
+[credential]
+	helper = osxkeychain
+
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    ui = true
+
+[alias]
+    apply-gitignore = !git ls-files -ci --exclude-standard -z | xargs -0r git rm --cached
+    undo = reset HEAD~1 --mixed
+    amend = commit -a --amend
+    discard-changes = reset --hard origin/master
+    force-pull = !git fetch --all && git reset --hard origin/master && git clean -df
