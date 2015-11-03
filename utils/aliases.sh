@@ -12,6 +12,7 @@ alias reloadaliases='source ~/.dotfiles/utils/aliases.sh'
 
 # Git
 alias git='hub'
+alias ga='git add'
 alias gc='git commit'
 alias gd='git diff --color'
 alias gl='git log --graph --pretty=format:"%Cred%h%Creset %C(yellow)%d%Creset %an: %s - %Creset %Cgreen(%cr, %cd)%Creset" --abbrev-commit --date=iso'
