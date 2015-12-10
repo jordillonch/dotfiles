@@ -1,5 +1,5 @@
 # PATH
-set PATH /usr/local/sbin $PATH
+set PATH /usr/local/sbin ~/.composer/vendor/bin $PATH
 
 # Path to your oh-my-fish.
 set fish_path $HOME/.oh-my-fish
@@ -26,3 +26,12 @@ end
 
 # Exports
 . $HOME/.dotfiles/utils/exports.sh
+
+# AWS s
+function s
+    ec2s $argv | percol --prompt='CONNECT TO>' | read -l target
+    set ip (echo $target | awk '{print $2}')
+    set port (echo $target | awk '{print $3}')
+    ssh -l jordi.llonch $ip -p$port
+end
+
