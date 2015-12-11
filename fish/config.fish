@@ -31,7 +31,6 @@ end
 function s
     ec2s $argv | percol --prompt='CONNECT TO>' | read -l target
     set ip (echo $target | awk '{print $2}')
-    set port (echo $target | awk '{print $3}')
-    ssh -l jordi.llonch $ip -p$port
+    ssh -l jordi.llonch $ip
 end
 
