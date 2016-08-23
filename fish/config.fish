@@ -1,5 +1,5 @@
 # PATH
-set PATH /usr/local/sbin ~/.composer/vendor/bin $PATH
+set PATH /usr/local/bin /usr/local/sbin ~/.composer/vendor/bin $PATH
 
 # Path to your oh-my-fish.
 set fish_path $HOME/.oh-my-fish
@@ -34,3 +34,5 @@ function s
     ssh -l jordi.llonch $ip
 end
 
+
+test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish

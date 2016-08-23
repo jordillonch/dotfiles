@@ -24,11 +24,17 @@ alias edithosts='sudo vim /etc/hosts'
 
 # Php
 alias phpunit='./vendor/bin/phpunit --colors'
-alias pf='./vendor/bin/phpunit --filter'
-alias pb='./vendor/bin/phpunit --exclude=integration,external'
-alias pi='./vendor/bin/phpunit --group=integration,external'
-alias behat='./vendor/bin/behat'
-alias bf='./vendor/bin/behat --tags=~skip -p'
+alias pf='./vendor/bin/phpunit --stop-on-failure --filter'
+alias pb='./vendor/bin/phpunit --exclude=integration,external --stop-on-failure'
+alias pi='./vendor/bin/phpunit --group=integration,external --stop-on-failure'
+alias behat='./vendor/bin/behat --stop-on-failure'
+alias bf='./vendor/bin/behat --tags=~skip --stop-on-failure -vvv -p'
+alias bfp='./vendor/bin/behat --tags=~skip --format=progress -vvv --stop-on-failure -p'
+function ci
+    disable-xdebug
+    composer install $argv
+    enable-xdebug
+end
 
 # Ip's
 alias public_ip="curl -s checkip.dyndns.org|sed -e 's/.*Current IP Address: //' -e 's/<.*\$//'"
@@ -61,4 +67,9 @@ function uuid_code
     set uuid (uuidgen | tr '[:upper:]' '[:lower:]')
     echo -n $uuid | pbcopy
     echo $uuid
+end
+function delete_mysql_tables_starting_by
+    mysql -uroot -N -B -e "SELECT CONCAT('DROP DATABASE ', SCHEMA_NAME, ';') AS QUERY FROM `information_schema`.`SCHEMATA` WHERE SCHEMA_NAME LIKE '$argv%';" | while read -l line
+        mysql -uroot -e "$line"
+    end
 end
